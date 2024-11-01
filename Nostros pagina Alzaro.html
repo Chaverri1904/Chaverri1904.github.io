@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros/Alzaro AZR SA</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            background-color: rgb(20, 20, 20); /* Fondo de la página color negro */
+        }
+
+        /* Estilos del contenedor principal */
+        .content { 
+            position: relative;
+            z-index: 1;
+            padding-top: 130px;
+            text-align: left; /* Ajuste para alinear el texto a la izquierda */
+            color: rgb(255, 255, 255);
+            font-family: Arial, sans-serif;
+            min-height: calc(100vh - 250px); /* Ajuste para que el contenido se mantenga entre las barras */
+            display: flex; /* Usamos flex para alinear el texto y la imagen */
+            justify-content: center;
+            align-items: flex-start; /* Alinea el contenido al principio del contenedor */
+            padding: 20px;
+            font-size: larger;
+        }
+
+        /* Barra horizontal */
+        .horizontal-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: calc(100% - 17px);
+            background-color: #000000;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        .horizontal-sidebar nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            padding: 0 20px;
+        }
+
+        .horizontal-sidebar img {
+            height: 90px;
+            margin-right: 20px;
+        }
+        .horizontal-sidebar a:hover {
+                    background-color: #000000;
+        }
+
+        .horizontal-sidebar a {
+            color: white;
+            margin: 0 30px;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        .dropdown {
+            position: relative; /* Posiciona el contenedor para que los elementos dentro puedan posicionarse en relación a él */
+        }
+
+        .dropdown-menu {
+    display: none; /* Ocultar el menú por defecto */
+    position: absolute; /* Posición absoluta para que se superponga a otros elementos */
+    background-color: #000000; /* Color de fondo del menú */
+    border: 2px solid #ff0000; /* Borde del menú */
+    border-radius: 6px; /* Bordes redondeados */
+    padding: 15px; /* Aumento de padding para más espacio alrededor */
+    z-index: 1; /* Asegura que esté por encima de otros elementos */
+    min-width: 150px; /* Establece un ancho mínimo */
+    max-height: 300px; /* Altura máxima para el menú */
+    overflow-y: auto; /* Agregar desplazamiento vertical */
+    width: 150px;
+}
+
+
+        .dropdown:hover .dropdown-menu {
+            display: block; /* Mostrar el menú al pasar el mouse sobre el contenedor */
+        }
+
+        /* Estilo para los enlaces del menú desplegable */
+        .dropdown-menu a {
+        color: white; /* Color del texto */
+        text-decoration: none; /* Eliminar subrayado */
+        display: block; /* Hacer que cada enlace ocupe el ancho completo */
+        margin: 10px 0; /* Aumento de margen entre los enlaces */
+        padding: 10px 5px; /* Espaciado interno para más espacio alrededor de cada enlace */
+        transition: color 0.3s; /* Transición suave para el color */
+    }
+
+
+        .dropdown-menu a:hover {
+            color: #ff0000; /* Color al pasar el mouse sobre el enlace */
+        }
+        .dropdown-menu a {
+        color: white; /* Color del texto */
+        text-decoration: none; /* Eliminar subrayado */
+        display: block; /* Hacer que cada enlace ocupe el ancho completo */
+        margin: 10px 0; /* Aumento de margen entre los enlaces */
+        padding: 10px 5px; /* Espaciado interno para más espacio alrededor de cada enlace */
+        transition: color 0.3s; /* Transición suave para el color */
+    }
+    
+
+        /* Sección de información adicional (segunda barra) */
+        .info-section {
+            background-color: #000000;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            font-size: 18px;
+            padding: 0 10px;
+        }
+        .horizontal-sidebar a:hover {
+            color: #ff0000;
+        }
+
+        /* Línea separadora entre la 1era y 2da barra */
+        .divider {
+            height: 1px; /* Altura de la línea */
+            background-color: rgba(255, 0, 0, 0.577); /* Color de la línea */
+            width: 100%; /* Ancho de la línea */
+            margin: 0; /* Sin margen */
+        }
+
+
+        /* Efecto de hover para rodear solo los íconos de redes y LinkedIn con una esfera roja */
+        .info-section .social-icon img {
+            height: 35px;
+            margin-right: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-section .social-icon:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px 5px #ff0000; /* Esfera roja */
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        /* Estilos generales para los enlaces e íconos en la barra 2 */
+        .info-section img,
+        .third-sidebar img {
+            height: 35px;
+            margin-right: 5px;
+        }
+
+        .info-section a,
+        .third-sidebar a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 18px;
+        }
+
+        .info-section span,
+        .third-sidebar span {
+            font-size: 25px;
+        }
+
+        .info-section a:hover,
+        .third-sidebar a:hover {
+            color: #ff0000;
+        }
+
+        /* Contenido principal */
+        .content-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        /* Contenedor de texto e imagen */
+        .text-container {
+            flex: 1;
+            margin-right: 20px;
+            font-size: 22px;
+            color: white; /* Color blanco para el texto */
+            margin-top: 130px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        .image-space {
+            width: 750px; /* Ajustar el ancho para la imagen */
+            height: 400px; /* Altura automática para mantener la proporción */
+            border-radius: 50px; /* Bordes redondeados */
+            overflow: hidden; /* Esconder el desbordamiento */
+            margin-left: 20px; /* Mover la imagen hacia la izquierda */
+            text-align: center; /* Centrar el texto debajo de la imagen */
+            margin-bottom: 20px; /* Espacio debajo de la imagen */
+            background-color: #ffffff;
+            margin-top: 130px;
+        }
+
+        .image-space img {
+            width: 100%; /* Fija el ancho a 100% para cubrir la imagen */
+            height: auto; /* Altura automática para mantener la proporción */
+        }
+
+        /* Texto debajo de la imagen */
+        .image-caption {
+            color: white; /* Color del texto */
+            margin-top: 10px; /* Espacio encima del texto */
+            font-size: 16px; /* Tamaño de fuente */
+        }
+
+        /* Contenedor para la imagen adicional y el texto a la derecha */
+        .additional-container {
+            display: flex; /* Para colocar la imagen y el texto uno al lado del otro */
+            justify-content: space-between; /* Alinea los elementos con espacio entre ellos */
+            align-items: center; /* Alinea los elementos verticalmente al centro */
+            margin-top: -200px;
+            padding: 0 50px;
+        }
+
+  
+
+        .additional-image-space img {
+            width: 100%;
+            height: auto;
+        }
+        .logo-container {
+            display: flex; /* Utilizamos flex para alinear los logos horizontalmente */
+            justify-content: space-between; /* Espacio entre los logos */
+            margin-top: 3000px; /* Espacio superior */
+            margin-left: 20px; /* Mover los logos hacia la izquierda */
+            margin-bottom: -200px; /* Espacio inferior */
+        }
+
+        .logo-item {
+            flex: 1; /* Cada logo ocupa el mismo espacio */
+            text-align: center; /* Centrar los logos */
+            margin: 0 10px; /* Margen entre los logos */
+        }
+
+        .logo-item img {
+            width: 200px; /* Ancho fijo para los logos */
+            height: 200px; /* Altura automática para mantener la proporción */
+        }
+
+        /* Texto debajo de cada logo */
+        .logo-text {
+            color: white; /* Color del texto */
+            font-size: 14px; /* Tamaño de fuente */
+            margin-top: 50px; /* Espacio encima del texto */
+        }
+
+        /* Imagen adicional debajo de los logos */
+        .additional-image-space {
+            width: 650px; /* Ancho de la imagen adicional */
+            height: 700px; /* Altura automática para mantener la proporción */
+
+    
+            text-align: center; /* Centrar el texto debajo de la imagen */
+            margin-bottom: 20px; /* Espacio debajo de la imagen */
+
+
+            margin-left: -50px;
+
+            margin-top: 100px;
+        }
+
+        /* Estilo para el texto a la derecha de la imagen */
+        .additional-text {
+            text-align: center;
+            flex: 1;
+            margin-right: -40px;
+            font-size: 22px;
+            color: white; /* Color blanco para el texto */
+
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-top: 30px;
+        }
+        .additional-text-before-footer {
+    text-align: center;
+    color: white;
+    margin: 50px 0;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+    /* Estilo para las cuatro columnas */
+.four-column-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            padding: 0 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .four-column {
+            flex: 1; /* Las columnas ocuparán el mismo espacio */
+            padding: 0 20px; /* Espaciado lateral */
+            font-size: 18px;
+        }
+
+        .four-column h3 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        /* Tercera barra al final de la página */
+        .footer-bar {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 16px;
+            margin-top: 100px;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around; /* Espacio entre columnas */
+            padding: 20px;
+        }
+
+        .footer-column {
+            flex: 1; /* Cada columna ocupa el mismo espacio */
+            padding: 0 20px; /* Espaciado interno */
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 10px;
+            color: #ff0000; /* Color para el encabezado de la columna */
+        }
+
+        .icon {
+            height: 12px;
+            margin-right: 5px;
+        }
+
+        /* Estilo para el logo en el footer */
+        .footer-logo img {
+            height: 200px; /* Altura del logo aumentada a 200px */
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Espacio a la derecha del buscador */
+        }
+
+        .search-container input {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0000; /* Color del botón */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-container button:hover {
+            background-color: #b30000; /* Color al pasar el mouse */
+        }                                                                                                               
+    </style>
+</head>
+<body>
+
+    <!-- Barra lateral horizontal -->
+       <!-- Barra lateral horizontal -->
+       <div class="horizontal-sidebar">
+        <nav>
+            <a href="Inicio pagina alzaro.html"><img src="Imagenes/Logo Alzaro JPG.png" alt="Logo de la Empresa"></a>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar...">
+                <button type="button" onclick="searchFunction()">Buscar</button>
+            </div>
+            <div style="display: flex; gap: 20px;"> <!-- Cambié el estilo aquí -->
+                <div style="display: flex; gap: 20px;"> <!-- Cambié el estilo aquí -->
+                    <a href="Inicio pagina alzaro.html">Inicio</a>
+                    <a href="Nostros pagina Alzaro.html">Nosotros</a>
+                    <div class="dropdown">
+                        <a href="Productos.html" class="dropdown-toggle">Productos</a>
+                        <div class="dropdown-menu">
+                            <h1 href="quimicos.html">Equipo Taller</a>
+                            <div style="padding-left: 10px;">
+                                <a href="Bendpak.html">Bendpak</a>                            
+                                <a href="Capelec.html">Capelec</a>
+                                <a href="Launch.html">Launch</a>
+                                <a href="Procut.html">Pro-Cut</a>
+                                <a href="Spin.html">Spin</a>
+                                <a href="Rotary.html">Rotary</a>
+                                <a href="Midtronics.html">Midtronics</a>
+                                <a href="hofmannmegaplan.html">Hofmann Megaplan</a>
+                                <a href="Samoa.html">Samoa</a>
+                            </div>
+                            <h1 href="EquipamientoTaller.html">Químicos</a>
+                            <div style="padding-left: 10px;">
+                                <a href="moc.html">MOC Products</a>
+                                <a href="Wunscher.html">Wünscher</a>
+    
+                            </div>
+                        </div>
+
+                </div>
+                <a href="Servicios.html">Servicios</a>
+                <a href="Contactanos.html">Contáctanos</a>
+            </nav>
+        <div class="divider"></div> <!-- Línea separadora entre las barras -->
+        <div class="info-section">
+            <div>
+                <a href="tel:+1234567890"><img src="Imagenes/Telefono blanco.png" alt="Teléfono" class="icon">Teléfono: (123) 456-7890</a>
+                <a href="mailto:info@ejemplo.com"><img src="Imagenes/Correo blanco (2).png" alt="Correo" class="icon">Correo: info@ejemplo.com</a>
+                <span><img src="Imagenes/Reloj blanco.png" alt="Horario" class="icon">Horario: L-V 9am - 6pm</span>
+            </div>
+            <div>
+                <a href="https://www.facebook.com/" target="_blank" class="social-icon">
+                    <img src="Imagenes/facebook.png" alt="Redes" class="icon">
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank" class="social-icon">
+                    <img src="Imagenes/linkedin.png" alt="LinkedIn" class="icon"> <!-- Campo adicional -->
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="content">
+        <div class="text-container">
+            <h1>Sobre nosotros</h1>
+            <p>Nos especializamos en ofrecer soluciones innovadoras en la gestión de recursos. Nuestra empresa ha crecido gracias a nuestro enfoque en la calidad y atención al cliente. Con un equipo altamente capacitado, estamos comprometidos en brindar servicios de primer nivel.</p>
+        </div>
+        <div class="image-space">
+            <img src="Imagenes/taller alzaro.jpg" alt="Logo de Alzaro">
+            <p class="image-caption">Comprometidos con la innovación y la excelencia</p>
+        </div>
+    </div>
+    <divider></divider>
+
+ <!-- Contenedor de los logos -->
+ <div class="content">
+    <div class="logo-item">
+        <img src="Imagenes/wrench.png" alt="Logo 1">
+        <div class="logo-text"><h1>Horas de servicio</h1><br>zljdn</div>
+    </div>
+    <div class="logo-item">
+        <img src="Imagenes/calendario.png" alt="Logo 1">
+        <div class="logo-text"><h1>Años de Servicio</h1><br>zljdn</div>
+    </div>
+    <div class="logo-item">
+        <img src="Imagenes/sonrisa.png" alt="Logo 2">
+        <div class="logo-text"><h1>CLientes Satisfechos</h1><br>zljdn</div>
+    </div>
+    <div class="logo-item">
+        <img src="Imagenes/casco.png" alt="Logo 3">
+        <div class="logo-text"><h1>Equipos Instalados</h1><br>zljdn</div>
+        
+    </div>
+
+</div>
+
+    <!-- Imagen adicional con texto a la derecha -->
+    <div class="additional-container">
+        <div class="additional-image-space">
+            <img src="Imagenes/metas.png" alt="Imagen adicional">
+        </div>
+        <div class="additional-text">
+            <h2>Visión</h2>
+            <p>En Alzaro AZR SA, trabajamos con un enfoque en la sostenibilidad y la innovación. Nos enorgullece ofrecer productos que no solo cumplen con los más altos estándares de calidad, sino que también ayudan a crear un futuro mejor para nuestra comunidad y el planeta.</p>
+
+            <h2>Misión</h2>
+            <p>Nuestra misión es ofrecer soluciones que impulsen el crecimiento de nuestros clientes y garanticen un impacto positivo en la sociedad y el medio ambiente. Con un equipo altamente capacitado, nos enfocamos en la excelencia y el servicio al cliente, brindando productos confiables y de calidad.</p>
+
+            <h2>Valores</h2>
+            <p>Los valores que nos definen son la integridad, la innovación y el compromiso con la sostenibilidad. Creemos en el trabajo en equipo, la mejora continua y el respeto hacia nuestros colaboradores y clientes.</p>
+
+        </div>
+    </div>
+
+<div class="additional-text-before-footer">
+    <h2>Factores de Exito</h2>
+    <p>Alzaro AZR SA ha estado a la vanguardia de la innovación en gestión de recursos durante más de 20 años. Nos enorgullece ser una empresa líder en el sector, siempre comprometidos con el crecimiento sostenible y el éxito de nuestros clientes. Nuestro equipo de expertos se esfuerza constantemente por ofrecer soluciones que se adapten a las necesidades cambiantes del mercado.</p>
+</div>
+   <!-- Cuatro columnas debajo del additional-text-before-footer -->
+   <div class="four-column-section">
+    <div class="four-column">
+        <h3>Calidad</h3>
+        <p>Ofrecemos productos de alta calidad que cumplen con los estándares internacionales...</p>
+    </div>
+    <div class="four-column">
+        <h3>Innovación</h3>
+        <p>Nos enfocamos en la innovación constante para ofrecer soluciones avanzadas a nuestros clientes...</p>
+    </div>
+    <div class="four-column">
+        <h3>Sostenibilidad</h3>
+        <p>Comprometidos con prácticas sostenibles, trabajamos para minimizar nuestro impacto ambiental...</p>
+    </div>
+    <div class="four-column">
+        <h3>Atención al cliente</h3>
+        <p>Nuestro equipo de atención al cliente está disponible para ayudar a nuestros clientes en todo momento...</p>
+    </div>
+</div>
+        <!-- Tercera barra al final de la página -->
+        <div class="footer-bar">
+            <div class="footer-content">
+                <div class="footer-column footer-logo">
+                    <a href="Inicio pagina alzaro.html"> <!-- Hipervínculo al inicio -->
+                        <img src="Imagenes/white n black.png" alt="Logo de la Empresa">
+                    </a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <p>Teléfono: (123) 456-7890</p>
+                    <p>Correo: info@ejemplo.com</p>
+                   <p>Dirección: Contiguo a PROLUSA, La Uruca, de FONT, 100 norte y 50 este, San José, 1200</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Servicios</h4>
+                    <p>Servicio 1</p>
+                    <p>Servicio 2</p>
+                    <p>Servicio 3</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Horario</h4>
+                    <p>Lunes a Viernes: 9am - 6pm</p>
+                    <p>Sábado: 10am - 2pm</p>
+                </div>
+            </div>
+            <p class="disclaimer">Información de la empresa: Somos una empresa dedicada a ofrecer los mejores productos y servicios. Contáctanos para más información.</p>
+        </div>
+    
+        <script>
+            function searchFunction() {
+                var input = document.getElementById('searchInput').value.toLowerCase();
+    
+                // Mapa de términos de búsqueda y sus correspondientes IDs de sección
+                var sectionMap = { 
+                    "preventivo": "preventivo",
+                    "correctivo": "correctivo",
+                    "repuestos": "repuestos",
+                    "pmp": "pmp"
+                };
+    
+                // Mapa de términos de búsqueda y sus correspondientes páginas
+                var pageMap = {
+                    "inicio": "Inicio pagina alzaro.html",
+                    "sevicios":"Servicios.html",
+                    "servicio":"Servicios.html",
+                    "nosotros": "Nostros pagina Alzaro.html",
+                    "productos": "productos.html",
+                    "producto": "productos.html",
+                    "químicos": "quimicos.html",
+                    "quimico":"quimico.html",
+                    "equipo taller": "EquipamientoTaller.html",
+                    "servicios": "Servicios.html",
+                    "contáctanos": "Contactanos.html",
+                    "contactanos": "Contactanos.html",
+                    "contacta": "Contactanos.html",
+                    "moc":"moc.html",
+                    "equipo":"equipamientoTaller.html",
+                    "equipo de taller":"EquipamientoTaller.html",
+                    "equipo taller":"EquipamientoTaller.html",
+                    "quimicos":"quimicos.html",
+                    "quimico":"quimicos.html",
+                    "bendpak":"Bendpak.html",
+                    "bend":"Bendpak.html",
+                    "pak":"Bendpak.html",
+                    "capelec":"capelec.html",
+                    "capel":"capelec.html",
+                    "launch":"Launch.html",
+                    "mid":"Midtronics.html",
+                    "tronics":"Midtronics.html",
+                    "midtronics":"Midtronics.html",
+                    "procut":"Procut.html",
+                    "pro":"Procut.html",
+                    "cut":"Procut.html",
+                    "pro cut":"Procut.html",
+                    "rotary":"Rotary.html",
+                    "rota":"Rotary.html",
+                    "tary":"Rotary.html",
+                    "samoa":"Samoa.html",
+                    "samo":"Samoa.html",
+                    "hofmannmegaplan":"hofmannmegaplan.html",
+                    "hofmann":"hofmannmegaplan.html",
+                    "hoffman":"hofmannmegaplan.html",
+                    "hoffmann":"hofmannmegaplan.html",
+                    "hofman":"hofmannmegaplan.html",
+                    "wuns":"Wunscher.html",
+                    "cher":"Wunscher.html",
+                    "wunscher":"Wunscher.html",
+                    "spin":"Spin.html",
+                    "spi":"Spin.html",
+    
+                    
+                    // Hipervínculos adicionales que puedes añadir para futuras páginas
+            
+                };
+    
+                // Si el término de búsqueda coincide con algún ID de la página actual, redirigir a esa sección
+                if (sectionMap[input]) {
+                    document.getElementById(sectionMap[input]).scrollIntoView({ behavior: 'smooth' });
+                }
+                // Si el término coincide con otra página, redirigir a esa página
+                else if (pageMap[input]) {
+                    window.location.href = pageMap[input];
+                } else {
+                    alert("No se encontró la sección o página. ");
+                }
+            }
+        </script>
+    
+    </body>
+    </html>
+    

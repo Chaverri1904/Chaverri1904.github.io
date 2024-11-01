@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bendpak/Alzaro AZR SA</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            background-color: black; /* Fondo de la página color negro */
+        }
+
+        /* Estilos del contenedor principal */
+        .content {
+            position: relative;
+            z-index: 1;
+            padding-top: 130px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Barra horizontal */
+        .horizontal-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: calc(100% - 17px);
+            background-color: #483549;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        .horizontal-sidebar nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            padding: 0 20px;
+        }
+
+        .horizontal-sidebar img {
+            height: 90px;
+            margin-right: 20px;
+        }
+
+        .horizontal-sidebar a {
+            color: white;
+            margin: 0 30px;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .horizontal-sidebar a:hover {
+            background-color: #483549;
+        }
+
+        /* Sección de información adicional (segunda barra) */
+        .info-section {
+            background-color: #483549;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            font-size: 18px;
+            padding: 0 10px;
+        }
+
+        .horizontal-sidebar a:hover {
+            color: #007BFF;
+        }
+        .dropdown {
+            position: relative; /* Posiciona el contenedor para que los elementos dentro puedan posicionarse en relación a él */
+        }
+
+        .dropdown-menu {
+    display: none; /* Ocultar el menú por defecto */
+    position: absolute; /* Posición absoluta para que se superponga a otros elementos */
+    background-color: #483549; /* Color de fondo del menú */
+    border: 1px solid #007BFF; /* Borde del menú */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 15px; /* Aumento de padding para más espacio alrededor */
+    z-index: 1; /* Asegura que esté por encima de otros elementos */
+    min-width: 150px; /* Establece un ancho mínimo */
+    max-height: 300px; /* Altura máxima para el menú */
+    overflow-y: auto; /* Agregar desplazamiento vertical */
+    width: 150px;
+}   
+
+        .dropdown:hover .dropdown-menu {
+            display: block; /* Mostrar el menú al pasar el mouse sobre el contenedor */
+        }
+
+        /* Estilo para los enlaces del menú desplegable */
+        .dropdown-menu a {
+            color: white; /* Color del texto */
+            text-decoration: none; /* Eliminar subrayado */
+            display: block; /* Hacer que cada enlace ocupe el ancho completo */
+            margin: 5px 0; /* Margen entre los enlaces */
+            transition: color 0.3s; /* Transición suave para el color */
+        }
+
+        .dropdown-menu a:hover {
+            color: #007BFF; /* Color al pasar el mouse sobre el enlace */
+        }
+        /* Línea separadora entre la 1era y 2da barra */
+        .divider {
+            height: 1px; /* Altura de la línea */
+            background-color: rgb(0, 0, 0); /* Color de la línea */
+            width: 100%; /* Ancho de la línea */
+            margin: 0; /* Sin margen */
+        }
+
+        /* Efecto de hover para rodear solo los íconos de redes y LinkedIn con una esfera roja */
+        .info-section .social-icon img {
+            height: 35px;
+            margin-right: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-section .social-icon:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px 5px #007BFF; /* Esfera roja */
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        /* Estilos generales para los enlaces e íconos en la barra 2 */
+        .info-section img,
+        .third-sidebar img {
+            height: 35px;
+            margin-right: 5px;
+        }
+
+        .info-section a,
+        .third-sidebar a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 18px;
+        }
+
+        .info-section span,
+        .third-sidebar span {
+            font-size: 25px;
+        }
+
+        .info-section a:hover,
+        .third-sidebar a:hover {
+            color: #007BFF;
+        }
+
+        /* Contenido principal */
+        .content-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        /* Botón para Equipamiento de Taller */
+        .equipamiento-button {
+            color: white; /* Color del texto */
+            text-decoration: none; /* Sin subrayado */
+            transition: background-color 0.3s ease; /* Transición suave para el fondo */
+            padding: 10px 20px; /* Espaciado interno del botón */
+            background-color: #007BFF; /* Color de fondo del botón */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            font-size: 18px; /* Tamaño de fuente del texto */
+            margin-top: 20px; /* Espaciado superior */
+            display: inline-block; /* Para que el margen funcione */
+        }
+
+        .equipamiento-button:hover {
+            background-color: #0056b3; /* Color azul oscuro al pasar el cursor */
+        }
+
+        /* Tercera barra al final de la página */
+        .footer-bar {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 16px;
+            margin-top: 100px;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around; /* Espacio entre columnas */
+            padding: 20px;
+        }
+
+        .footer-column {
+            flex: 1; /* Cada columna ocupa el mismo espacio */
+            padding: 0 20px; /* Espaciado interno */
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 10px;
+            color: #007BFF; /* Color para el encabezado de la columna */
+        }
+
+        .icon {
+            height: 12px;
+            margin-right: 5px;
+        }
+
+        /* Estilo para el logo en el footer */
+        .footer-logo img {
+            height: 200px; /* Altura del logo aumentada a 200px */
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Espacio a la derecha del buscador */
+        }
+
+        .search-container input {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px; 
+        }
+
+        .search-container button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF; /* Color del botón */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-container button:hover {
+            background-color: #0056b3; /* Color al pasar el mouse */
+        }
+        .three-columns {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 50px 0;
+            background-color: #333;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .column {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .column img {
+            width: 100%;
+            max-width: 150px; /* Ajusta el tamaño máximo de la imagen */
+            margin-bottom: 10px;
+        }
+
+        .column h2 {
+            font-size: 22px;
+            color: #007BFF; /* Color del título */
+            margin-bottom: 15px;
+        }
+        .three-columns-two {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 50px 0;
+            background-color: #444; /* Color de fondo diferente para la segunda fila */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .column-two {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .column-two img {
+            width: 100%;
+            max-width: 150px; /* Ajusta el tamaño máximo de la imagen */
+            margin-bottom: 10px;
+        }
+
+        .column-two h2 {
+            font-size: 22px;
+            color: #007BFF; /* Color del título */
+            margin-bottom: 10px;
+        }
+
+        .column-two p {
+            font-size: 16px;
+        }
+    </style>
+    </style>
+</head>
+<body>
+
+    <!-- Barra lateral horizontal -->
+    <div class="horizontal-sidebar">
+        <nav>
+            <a href="Inicio pagina alzaro.html"><img src="Imagenes/Logo Alzaro JPG.png" alt="Logo de la Empresa"></a>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar...">
+                <button type="button" onclick="searchFunction()">Buscar</button>
+            </div>
+            
+            <div style="display: flex; gap: 20px;"> <!-- Cambié el estilo aquí -->
+                <a href="Inicio pagina alzaro.html">Inicio</a>
+                <a href="Nostros pagina Alzaro.html">Nosotros</a>
+                <div class="dropdown">
+                    <a href="Productos.html" class="dropdown-toggle">Productos</a>
+                    <div class="dropdown-menu">
+                        <h1 href="quimicos.html">Químicos</a>
+                        <div style="padding-left: 10px;">
+                            <a href="Bendpak.html">Bendpak</a>                            
+                            <a href="Capelec.html">Capelec</a>
+                            <a href="Launch.html">Launch</a>
+                            <a href="Procut.html">Pro-Cut</a>
+                            <a href="Spin.html">Spin</a>
+                            <a href="Midtronics.html">Midtronics</a>
+                            <a href="Rotary.html">Hofmann Megaplan</a>
+                            <a href="Samoa.html">Samoa</a>
+                        </div>
+                        <h1 href="EquipamientoTaller.html">Equipo Taller</a>
+                        <div style="padding-left: 10px;">
+                            <a href="moc.html">MOC Products</a>
+                            <a href="equipo-taller2.html">Wünscher</a>
+
+                        </div>
+                    </div>
+
+            </div>
+            <a href="Servicios.html">Servicios</a>
+            <a href="Contactanos.html">Contáctanos</a>
+        </nav>
+        <div class="divider"></div> <!-- Línea separadora entre la 1era y 2da barra -->
+        <div class="info-section">
+            <div>
+                <a href="tel:+1234567890"><img src="Imagenes/Telefono blanco.png" alt="Teléfono" class="icon">Teléfono: (123) 456-7890</a>
+                <a href="mailto:info@ejemplo.com"><img src="Imagenes/Correo blanco (2).png" alt="Correo" class="icon">Correo: info@ejemplo.com</a>
+                <span><img src="Imagenes/Reloj blanco.png" alt="Horario" class="icon">Horario: L-V 9am - 6pm</span>
+            </div>
+            <div>
+                <a href="https://www.facebook/" target="_blank" class="social-icon">
+                    <img src="Imagenes/facebook.png" alt="Redes" class="icon">
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank" class="social-icon">
+                    <img src="Imagenes/linkedin.png" alt="LinkedIn" class="icon"> <!-- Campo adicional -->
+                </a>
+            </div>
+        </div>
+        <div class="third-sidebar"></div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="content">
+        <h1>Carlifts</h1>
+        <!-- Botón que lleva a la sección de Equipamiento de Taller -->
+        <a href="EquipamientoTaller.html" class="equipamiento-button">Ir a Equipamiento de Taller</a>
+    </div>
+    <br>  <br>  <br>  <br>  <br>
+
+<!-- Título encima de las columnas -->
+<h2 style="text-align: center; color: white; margin-bottom: 20px;">Nuestros Productos Destacados</h2>
+
+<div class="three-columns">
+    <div class="column">
+        <a href="equipobendpak/carlifts.html" style="text-decoration: none; color: inherit;">
+            <h2>Título 1</h2>
+            <img src="Imagenes/logo1.png" alt="Imagen 1">
+        </a>
+        <p>Descripción breve para la imagen 1.</p>
+    </div>
+    <div class="column">
+        <a href="producto2.html" style="text-decoration: none; color: inherit;">
+            <h2>Título 2</h2>
+            <img src="Imagenes/logo2.png" alt="Imagen 2">
+        </a>
+        <p>Descripción breve para la imagen 2.</p>
+    </div>
+    <div class="column">
+        <a href="producto3.html" style="text-decoration: none; color: inherit;">
+            <h2>Título 3</h2>
+            <img src="Imagenes/logo3.png" alt="Imagen 3">
+        </a>
+        <p>Descripción breve para la imagen 3.</p>
+    </div>
+</div>
+<div class="three-columns-two">
+    <div class="column-two">
+        <img src="logo4.png" alt="Logo 4">
+        <h2>Título 4</h2>
+        <p>Descripción breve del producto 4.</p>
+    </div>
+    <div class="column-two">
+        <img src="logo5.png" alt="Logo 5">
+        <h2>Título 5</h2>
+        <p>Descripción breve del producto 5.</p>
+    </div>
+    <div class="column-two">
+        <img src="logo6.png" alt="Logo 6">
+        <h2>Título 6</h2>
+        <p>Descripción breve del producto 6.</p>
+    </div>
+</div>
+    <!-- Tercera barra al final de la página -->
+    <div class="footer-bar">
+        <div class="footer-content">
+            <div class="footer-column footer-logo">
+                <a href="Inicio pagina alzaro.html"> <!-- Hipervínculo al inicio -->
+                    <img src="Imagenes/white n black.png" alt="Logo de la Empresa">
+                </a>
+            </div>
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <p>Teléfono: (123) 456-7890</p>
+                <p>Correo: info@ejemplo.com</p>
+            </div>
+            <div class="footer-column">
+                <h4>Servicios</h4>
+                <p>Servicio 1</p>
+                <p>Servicio 2</p>
+                <p>Servicio 3</p>
+            </div>
+            <div class="footer-column">
+                <h4>Horario</h4>
+                <p>Lunes a Viernes: 9am - 6pm</p>
+                <p>Sábado: 10am - 2pm</p>
+            </div>
+        </div>
+        <p>Información de la empresa: Somos una empresa dedicada a ofrecer los mejores productos y servicios. Contáctanos para más información.</p>
+    </div>
+    <script>
+        function searchFunction() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+
+            // Mapa de términos de búsqueda y sus correspondientes IDs de sección
+            var sectionMap = {
+                "preventivo": "preventivo",
+                "correctivo": "correctivo",
+                "repuestos": "repuestos",
+                "pmp": "pmp"
+            };
+
+            // Mapa de términos de búsqueda y sus correspondientes páginas
+            var pageMap = {
+                "inicio": "Inicio pagina alzaro.html",
+                "sevicios":"Servicios.html",
+                "servicio":"Servicios.html",
+                "nosotros": "Nostros pagina Alzaro.html",
+                "productos": "productos.html",
+                "producto": "productos.html",
+                "químicos": "quimicos.html",
+                "quimico":"quimico.html",
+                "equipo taller": "EquipamientoTaller.html",
+                "servicios": "Servicios.html",
+                "contáctanos": "Contactanos.html",
+                "contactanos": "Contactanos.html",
+                "contacta": "Contactanos.html",
+                "moc":"moc.html",
+                "equipo":"equipamientoTaller.html",
+                "equipo de taller":"EquipamientoTaller.html",
+                "equipo taller":"EquipamientoTaller.html",
+                "quimicos":"quimicos.html",
+                "quimico":"quimicos.html",
+                "bendpak":"Bendpak.html",
+                "bend":"Bendpak.html",
+                "pak":"Bendpak.html",
+                "capelec":"capelec.html",
+                "capel":"capelec.html",
+                "launch":"Launch.html",
+                "mid":"Midtronics.html",
+                "tronics":"Midtronics.html",
+                "midtronics":"Midtronics.html",
+                "procut":"Procut.html",
+                "pro":"Procut.html",
+                "cut":"Procut.html",
+                "pro cut":"Procut.html",
+                "rotary":"Rotary.html",
+                "rota":"Rotary.html",
+                "tary":"Rotary.html",
+                "samoa":"Samoa.html",
+                "samo":"Samoa.html",
+                "hofmannmegaplan":"hofmannmegaplan.html",
+                "hofmann":"hofmannmegaplan.html",
+                "hoffman":"hofmannmegaplan.html",
+                "hoffmann":"hofmannmegaplan.html",
+                "hofman":"hofmannmegaplan.html",
+                "wuns":"Wunscher.html",
+                "cher":"Wunscher.html",
+                "wunscher":"Wunscher.html",
+                "spin":"Spin.html",
+                "spi":"Spin.html",
+
+                
+                // Hipervínculos adicionales que puedes añadir para futuras páginas
+        
+            };
+
+            // Si el término de búsqueda coincide con algún ID de la página actual, redirigir a esa sección
+            if (sectionMap[input]) {
+                document.getElementById(sectionMap[input]).scrollIntoView({ behavior: 'smooth' });
+            }
+            // Si el término coincide con otra página, redirigir a esa página
+            else if (pageMap[input]) {
+                window.location.href = pageMap[input];
+            } else {
+                alert("No se encontró la sección o página. ");
+            }
+        }
+    </script>
+
+</body>
+</html>
